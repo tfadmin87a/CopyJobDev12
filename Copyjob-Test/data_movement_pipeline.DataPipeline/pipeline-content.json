@@ -1,0 +1,122 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy data1",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "LakehouseTableSource",
+            "datasetSettings": {
+              "annotations": [],
+              "connectionSettings": {
+                "name": "1e43e5f3_3b14_4b22_9f46_7a2c2c456eac",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "@pipeline().libraryVariables.WSvariables_Source_Workspace_ID",
+                    "artifactId": "@pipeline().libraryVariables.WSvariables_Source_Lakehouse_ID",
+                    "rootFolder": "Tables"
+                  },
+                  "externalReferences": {
+                    "connection": "ee890e56-55f9-4809-8d94-c0e9abdbfbab"
+                  }
+                }
+              },
+              "type": "LakehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "table": {
+                  "value": "@pipeline().libraryVariables.WSvariables_SourceTable_Name",
+                  "type": "Expression"
+                }
+              }
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "partitionOption": "None",
+            "applyVOrder": true,
+            "datasetSettings": {
+              "annotations": [],
+              "connectionSettings": {
+                "name": "0c179de7_f211_42cf_9a73_03be51d96185",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "@pipeline().libraryVariables.WSvariables_Destination_Workspace_ID",
+                    "artifactId": "@pipeline().libraryVariables.WSvariables_Destination_Lakehouse_ID",
+                    "rootFolder": "Tables"
+                  },
+                  "externalReferences": {
+                    "connection": "ee890e56-55f9-4809-8d94-c0e9abdbfbab"
+                  }
+                }
+              },
+              "type": "LakehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "table": {
+                  "value": "@pipeline().libraryVariables.WSvariables_DestinationTable_Name",
+                  "type": "Expression"
+                }
+              }
+            }
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      }
+    ],
+    "libraryVariables": {
+      "WSvariables_Source_Lakehouse_ID": {
+        "type": "String",
+        "variableName": "Source_Lakehouse_ID",
+        "libraryName": "WS variables"
+      },
+      "WSvariables_Source_Workspace_ID": {
+        "type": "String",
+        "variableName": "Source_Workspace_ID",
+        "libraryName": "WS variables"
+      },
+      "WSvariables_Destination_Lakehouse_ID": {
+        "type": "String",
+        "variableName": "Destination_Lakehouse_ID",
+        "libraryName": "WS variables"
+      },
+      "WSvariables_Destination_Workspace_ID": {
+        "type": "String",
+        "variableName": "Destination_Workspace_ID",
+        "libraryName": "WS variables"
+      },
+      "WSvariables_SourceTable_Name": {
+        "type": "String",
+        "variableName": "SourceTable_Name",
+        "libraryName": "WS variables"
+      },
+      "WSvariables_DestinationTable_Name": {
+        "type": "String",
+        "variableName": "DestinationTable_Name",
+        "libraryName": "WS variables"
+      }
+    }
+  }
+}
